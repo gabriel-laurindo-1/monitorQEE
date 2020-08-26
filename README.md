@@ -6,6 +6,6 @@ Dessa maneira, seu objetivo é permitir que o consumidor comum possa ter conheci
 ---
 ## Tecnologias utilizadas
 - Arduino
--Linguagem C/C++
+- Linguagem C/C++
 ---
 Desenvolvido por Gabriel Laurindo
