@@ -42,7 +42,7 @@ A relação de componentes utilizados pode ser vista na tabela abaixo.
 | 17   |      1     |     X1     |   CRYSTAL  |
 
 
-Para baixa a lista de materias, [Clique aqui!](https://github.com/gabriel-laurindo-1/monitorQEE/blob/master/EnergyMonitor/pcb/Bill%20Of%20Materials%20Energy%20Quality%20Monitor.pdf)
+Para baixar a lista de materias, [Clique aqui!](https://github.com/gabriel-laurindo-1/monitorQEE/blob/master/EnergyMonitor/pcb/Bill%20Of%20Materials%20Energy%20Quality%20Monitor.pdf)
 
 
 ---
