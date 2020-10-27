@@ -11,7 +11,6 @@
             SDA pin   -> Arduino Digital 18 (SDA)
             SCL pin   -> Arduino Digital 19 (SCL)
             -----------------------------------------
-*/
 
 // ===== Inclusao das bibliotecas =====
 #include "EmonLib.h"
@@ -23,7 +22,7 @@ RTC_DS3231 rtc;
 
 
 // ===== Constantes e diretivas gerais =====
-#define nAmostras 16
+const unsigned int nSamples = 16;
 const unsigned char measureInterval = 1;
 
 // ===== Pins Hardware =====
@@ -33,9 +32,8 @@ const unsigned char measureInterval = 1;
 #define pinCur  A1
 
 // ===== Variaveis  =====
-float frequency = 60;
+float voltageRange = 230.0;
 float nano = 1 * pow (10, -6);
-
 float angle_max = 0;
 
 float frequency_meter = 0; // [Hz] - Retorna a frequencia do sinal
@@ -44,9 +42,9 @@ float voltageAC_meter = 0;
 float currentAC_meter = 0;
 
 // ===== Prototipos de funcao =====
-float measureFrequency(unsigned char pinoSinal);
-float measurePowerFactor(unsigned char pinoSinal, float frequency_value);
-float measureVoltageAC(unsigned char pinoSinal);
+float measureFrequency(unsigned char pinSignal);
+float measurePowerFactor(unsigned char pinSignal, float frequency_value);
+float measureVoltageAC(unsigned char pinSignal);
 float measureCurrentAC();
 void RTC_print();
 void dataRegister();
@@ -84,25 +82,25 @@ void loop()
 }
 
 // ===== Desenvolvimento das funcoes =====
-float measureFrequency(unsigned char pinoSinal)
+float measureFrequency(unsigned char pinSignal)
 {
-  float period = (pulseIn( pinoSinal, HIGH ) + pulseIn( pinoSinal, LOW )) * nano;
+  float period = (pulseIn( pinSignal, HIGH ) + pulseIn( pinSignal, LOW )) * nano;
   if (period == 0)
     return 0;
   else
     return  1.0 / period ;
 }
 
-float measurePowerFactor(unsigned char pinoSinal, float frequency_value)
+float measurePowerFactor(unsigned char pinSignal, float frequency_value)
 {
   float powerFactor = 0;
   float angle = 0.0;
   float phase = 0.0;
   float degree = 360.0;
   // put your main code here, to run repeatedly:
-  for (int i = 0; i < nAmostras; i++)
+  for (int i = 0; i < nSamples; i++)
   {
-    angle = ( ( ( ( pulseIn( pinoSinal, HIGH ) ) * nano ) * degree ) * frequency_value );
+    angle = ( ( ( ( pulseIn( pinSignal, HIGH ) ) * nano ) * degree ) * frequency_value );
 
     if (angle > angle_max)
     {
@@ -113,7 +111,7 @@ float measurePowerFactor(unsigned char pinoSinal, float frequency_value)
   if (angle_max > 360) 
   {
     angle_max = 0; 
-    powerFactor = 1; 
+    powerFactor = 1.0; 
   }
   
   angle = 0;
@@ -121,12 +119,12 @@ float measurePowerFactor(unsigned char pinoSinal, float frequency_value)
   return powerFactor;
 }
 
-float measureVoltageAC(unsigned char pinoSinal)
+float measureVoltageAC(unsigned char pinSignal)
 {
   long acc = 0;
-  for (int i = 0; i < nAmostras; i++) acc += analogRead(pinoSinal);
+  for (int i = 0; i < nSamples; i++) acc += analogRead(pinSignal);
 
-  return ((acc / float(nAmostras)) * 230.0 / 1023.0);
+  return ( ( acc / float(nSamples) ) * voltageRange / 1023.0 );
 }
 
 float measureCurrentAC()
