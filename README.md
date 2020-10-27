@@ -1,7 +1,7 @@
 # EQM - Energy Monitor Quality (Monitor de Qualidade de Energia)
 
 
-![Visão 3D do protótipo do EQM.](EnergyMonitor\images\view3D.PNG)
+![Visão 3D do protótipo do EQM.](https://github.com/gabriel-laurindo-1/monitorQEE/blob/master/EnergyMonitor/images/view3D.PNG)
 
 ## Sobre
 
@@ -42,7 +42,7 @@ A relação de componentes utilizados pode ser vista na tabela abaixo.
 | 17   |      1     |     X1     |   CRYSTAL  |
 
 
-Para baixa a lista de materias, [Clique aqui!](EnergyMonitor\pcb\Bill-Of-Materials-Energy-Quality-Monitor.pdf)
+Para baixa a lista de materias, [Clique aqui!](https://github.com/gabriel-laurindo-1/monitorQEE/blob/master/EnergyMonitor/pcb/Bill%20Of%20Materials%20Energy%20Quality%20Monitor.pdf)
 
 
 ---
